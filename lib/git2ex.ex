@@ -23,10 +23,13 @@ defmodule Git2Ex do
     crate: "git2ex",
     base_url: "https://github.com/mjason/git2ex/releases/download/v#{version}",
     force_build: System.get_env("GIT2EX_BUILD") in ["1", "true"],
+    # x86_64-apple-darwin (Intel Mac) is omitted: GitHub's macos-13 runners
+    # queue for hours and no consumer needs it (Linux deploys + Apple Silicon
+    # Macs). Add it back — one line here and in the release workflow — if an
+    # Intel Mac ever needs a prebuilt binary.
     targets: ~w(
       aarch64-apple-darwin
       aarch64-unknown-linux-gnu
-      x86_64-apple-darwin
       x86_64-unknown-linux-gnu
     ),
     nif_versions: ["2.15"],

@@ -60,8 +60,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # x86_64-apple-darwin (macos-13) omitted — that runner queues for
+        # hours and no consumer targets Intel Macs. See lib/git2ex.ex.
         include:
-          - { target: x86_64-apple-darwin, os: macos-13, nif: "2.15" }
           - { target: aarch64-apple-darwin, os: macos-14, nif: "2.15" }
 
     steps:
