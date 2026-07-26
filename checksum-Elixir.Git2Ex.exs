@@ -1,5 +1,5 @@
 %{
-  "libgit2ex-v0.1.0-nif-2.15-aarch64-apple-darwin.so.tar.gz" => "sha256:7b430bdfb4a7d7f2980e7120552e14dd71ff4555e2da9746b629e0270af6857d",
-  "libgit2ex-v0.1.0-nif-2.15-aarch64-unknown-linux-gnu.so.tar.gz" => "sha256:0002813e8fa40ed68ca5cff8f98fcde2c1d001e58d9e40dbed96572beac9aa01",
-  "libgit2ex-v0.1.0-nif-2.15-x86_64-unknown-linux-gnu.so.tar.gz" => "sha256:1a6f1ff1e768f0e04f78034f60127a291d255b494a53901620d85bcea746e5e8",
+  "libgit2ex-v0.2.0-nif-2.15-aarch64-apple-darwin.so.tar.gz" => "sha256:365b9a2a706eb7f8718389bae673434d5207857bc4f3e4cf697e8a0e97230f5b",
+  "libgit2ex-v0.2.0-nif-2.15-aarch64-unknown-linux-gnu.so.tar.gz" => "sha256:2a2600362eb6ab9f33599711e40a93bfb0016553f372d635ea5b2bc757dc0bff",
+  "libgit2ex-v0.2.0-nif-2.15-x86_64-unknown-linux-gnu.so.tar.gz" => "sha256:ef8369c5df5ce761a16b9ae5d32ac4a2b84b34986f2fa0e0935ec6b653b9765c",
 }
