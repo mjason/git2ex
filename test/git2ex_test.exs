@@ -23,6 +23,20 @@ defmodule Git2ExTest do
     assert {:ok, %{repo: false, root: nil, files: []}} = Git2Ex.status(outside)
   end
 
+  test "discover finds the repo root from a subdirectory; nil outside a repo", %{repo: repo} do
+    sub = Path.join(repo, "a/b")
+    File.mkdir_p!(sub)
+
+    assert {:ok, %{repo: true, root: root}} = Git2Ex.discover(sub)
+    # libgit2 may return a trailing-slash-normalized, symlink-resolved path.
+    assert Path.expand(root) == Path.expand(repo)
+
+    outside = Path.join(System.tmp_dir!(), "git2ex-none-#{System.unique_integer([:positive])}")
+    File.mkdir_p!(outside)
+    on_exit(fn -> File.rm_rf(outside) end)
+    assert {:ok, %{repo: false, root: nil}} = Git2Ex.discover(outside)
+  end
+
   test "status → stage → commit → log → show lifecycle", %{repo: repo} do
     File.write!(Path.join(repo, "a.txt"), "hello\n")
 

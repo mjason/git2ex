@@ -44,6 +44,14 @@ defmodule Git2Ex do
         }
 
   @doc """
+  The working-tree root of the repository containing `path` (walks up dirs):
+  `{:ok, %{repo: true, root: "/abs/root"}}`, or `%{repo: false, root: nil}`
+  when `path` is not inside a repo. Cheap — no status walk — for callers that
+  only need the root.
+  """
+  def discover(_path), do: err()
+
+  @doc """
   Working-tree status. `{:ok, %{repo, root, branch, files}}`; `repo: false`
   when `path` is not inside a repository. Status codes are porcelain `XY`
   (may carry a trailing space, e.g. `"M "`); staged renames are detected

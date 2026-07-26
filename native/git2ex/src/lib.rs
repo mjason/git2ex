@@ -58,6 +58,12 @@ struct ShowResult {
     truncated: bool,
 }
 
+#[derive(NifMap)]
+struct DiscoverResult {
+    repo: bool,
+    root: Option<String>,
+}
+
 fn git_error(err: git2::Error) -> String {
     err.message().to_string()
 }
@@ -76,6 +82,27 @@ fn truncate_utf8(s: &str, max: usize) -> String {
         end -= 1;
     }
     s[..end].to_string()
+}
+
+// --- discover ---------------------------------------------------------------
+
+/// The working-tree root of the repository containing `path` (walks up dirs),
+/// or `repo: false` when there is none. O(directory depth) — no status walk,
+/// so callers that only need the root don't pay for a full working-tree diff.
+#[rustler::nif(schedule = "DirtyCpu")]
+fn discover(path: String) -> Result<DiscoverResult, String> {
+    match Repository::discover(&path) {
+        Ok(repo) => Ok(DiscoverResult {
+            repo: true,
+            root: repo
+                .workdir()
+                .map(|p| p.to_string_lossy().trim_end_matches('/').to_string()),
+        }),
+        Err(_) => Ok(DiscoverResult {
+            repo: false,
+            root: None,
+        }),
+    }
 }
 
 // --- status -----------------------------------------------------------------
